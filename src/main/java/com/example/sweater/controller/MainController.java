@@ -49,13 +49,13 @@ public class MainController {
     }
 
     @PostMapping("/filter")
-    public String filter(@RequestParam String filter,
+    public String filter(@RequestParam String tag,
                          Map<String, Object> model) {
 
         Iterable<Message> messages;
 
-        if (filter == null && filter.isEmpty()) {
-            messages = messageRepository.findByTag(filter);
+        if (tag == null && tag.isEmpty()) {
+            messages = messageRepository.findByTag(tag);
         } else {
             messages = messageRepository.findAll();
         }
