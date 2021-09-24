@@ -8,9 +8,10 @@
 </div>
     <br>
 <div>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <input type="text" name="text" placeholder="Enter your message"/>
         <input type="text" name="tag" placeholder="Tag">
+        <input type="file" name="file">
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button type="submit">Add</button>
     </form>
@@ -18,7 +19,7 @@
     <br>
 <div>List of messages</div>
 <form method="get" action="/main">
-    <input type="text" name="filter" value="${filter!""}" placeholder="Enter tag">
+    <input type="text" name="filter" value="${filter?ifExists}" placeholder="Enter tag">
     <button type="submit">Find</button>
 </form>
     <br>
@@ -28,6 +29,11 @@
         <span>${messages.text}</span>
         <i>${messages.tag}</i>
         <strong>${messages.authorName}</strong>
+        <div>
+            <#if messages.filename??>
+                <img src="/img/${messages.filename}">
+            </#if>
+        </div>
     </div>
 <#else>
 No message
