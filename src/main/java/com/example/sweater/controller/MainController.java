@@ -21,7 +21,6 @@ public class MainController {
         this.messageRepository = messageRepository;
     }
 
-
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
         return "greeting";
