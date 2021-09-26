@@ -3,6 +3,7 @@ package com.example.sweater.controller;
 import com.example.sweater.domain.Message;
 import com.example.sweater.domain.User;
 import com.example.sweater.repository.MessageRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -20,14 +21,11 @@ import java.util.UUID;
 @Controller
 public class MainController {
 
-    private final MessageRepository messageRepository;
+    @Autowired
+    private MessageRepository messageRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
-
-    public MainController(MessageRepository messageRepository) {
-        this.messageRepository = messageRepository;
-    }
 
     @GetMapping("/")
     public String greeting(Map<String, Object> model) {
