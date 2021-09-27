@@ -28,7 +28,8 @@ public class User implements UserDetails {
 
     private boolean active;
 
-    @Email(message = "Email is not correct!")
+    @Email(message = "Email is not correct")
+    @NotBlank(message = "Email cannot be empty")
     private String email;
     private String activationCode;
 
