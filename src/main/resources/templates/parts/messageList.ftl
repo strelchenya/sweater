@@ -18,11 +18,11 @@
                 <div class="row">
                     <a class="col align-self-center"
                        href="/user-messages/${message.author.id}">${message.authorName}</a>
-                    <a class="col align-self-center" href="#">
+                    <a class="col align-self-center" href="/messages/${message.id}/like">
                         <#if message.meLiked>
-                            <i class="far fa-heart"></i>
-                        <#else>
                             <i class="fas fa-heart"></i>
+                        <#else>
+                            <i class="far fa-heart"></i>
                         </#if>
                         ${message.likes}
                     </a>
