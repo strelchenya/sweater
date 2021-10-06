@@ -138,6 +138,27 @@ public class MessageController {
             @RequestParam("tag") String tag,
             @RequestParam("file") MultipartFile file
     ) throws IOException {
+        //It's not time to fix this crutch yet.
+        if (message == null && !StringUtils.isEmpty(text) && !StringUtils.isEmpty((tag))) {
+            Message newMessage = new Message();
+
+            newMessage.setText(text);
+            newMessage.setTag(tag);
+            newMessage.setAuthor(currentUser);
+
+            saveFile(newMessage, file);
+
+            messageRepository.save(newMessage);
+
+            return "redirect:/user-messages/" + user;
+        }
+
+        //we will cure you too
+        if (message == null &&
+                (StringUtils.isEmpty(text) || StringUtils.isEmpty((tag)))) {
+            return "redirect:/user-messages/" + user;
+        }
+
         if (message.getAuthor().equals(currentUser)) {
             if (!StringUtils.isEmpty(text)) {
                 message.setText(text);
@@ -146,6 +167,7 @@ public class MessageController {
             if (!StringUtils.isEmpty((tag))) {
                 message.setTag(tag);
             }
+
 
             saveFile(message, file);
 
